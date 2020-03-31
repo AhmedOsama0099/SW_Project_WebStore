@@ -1,5 +1,6 @@
 package com.example.webstore.api;
 
+import com.example.webstore.UserNotfoundException;
 import com.example.webstore.model.Admin;
 import com.example.webstore.model.User;
 import com.example.webstore.service.AdminService;
@@ -25,7 +26,11 @@ public class AdminController {
 
     @GetMapping(path = "/loginAdmin/{userName}/{pw}")
     public Admin loginAdmin(@PathVariable("userName") String userName, @PathVariable("pw") String pw){
-        return adminService.loginAdmin(userName,pw);
+        Admin admin=adminService.loginAdmin(userName,pw);
+        if(admin==null){
+            throw new UserNotfoundException();
+        }
+        return admin;
     }
 
     @GetMapping(value = "/adminList")
