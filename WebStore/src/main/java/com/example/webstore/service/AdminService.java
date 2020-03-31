@@ -13,8 +13,8 @@ public class AdminService {
     @Resource
     AdminDao adminDao;
 
-    public Admin getAdmin(String userName, String pw){
-        return adminDao.getAdmin(userName, pw);
+    public Admin loginAdmin(String userName, String pw){
+        return adminDao.loginAdmin(userName, pw);
     }
     public List<Admin> findAll() {
         return adminDao.findAll();

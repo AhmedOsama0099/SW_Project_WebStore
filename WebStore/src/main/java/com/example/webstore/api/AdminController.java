@@ -23,9 +23,9 @@ public class AdminController {
         adminService.insertAdmin(admin);
     }
 
-    @GetMapping(path = "/getAdmin/{userName}")
-    public Admin getAdmin(@PathVariable("userName") String userName, String pw){
-        return adminService.getAdmin(userName,pw);
+    @GetMapping(path = "/loginAdmin/{userName}/{pw}")
+    public Admin loginAdmin(@PathVariable("userName") String userName, @PathVariable("pw") String pw){
+        return adminService.loginAdmin(userName,pw);
     }
 
     @GetMapping(value = "/adminList")

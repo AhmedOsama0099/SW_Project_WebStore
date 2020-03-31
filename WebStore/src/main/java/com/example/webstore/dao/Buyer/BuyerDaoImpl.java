@@ -1,6 +1,6 @@
 package com.example.webstore.dao.Buyer;
 
-import com.example.webstore.mapper.UserRowMapper;
+import com.example.webstore.mapper.BuyerRowMapper;
 import com.example.webstore.model.Buyer;
 import com.example.webstore.model.User;
 import org.springframework.dao.DataAccessException;
@@ -27,11 +27,11 @@ public class BuyerDaoImpl implements BuyerDao {
     NamedParameterJdbcTemplate template;
 
     @Override
-    public List<User> findAll() {
+    public List<Buyer> findAll() {
         return template.query("SELECT *\n" +
                 "FROM users\n" +
                 "INNER JOIN buyer\n" +
-                "ON users.userName = buyer.userName;", new UserRowMapper());
+                "ON users.userName = buyer.userName;", new BuyerRowMapper());
     }
 
     @Override
@@ -84,5 +84,18 @@ public class BuyerDaoImpl implements BuyerDao {
                 return ps.executeUpdate();
             }
         });
+    }
+
+    @Override
+    public Buyer loginBuyer(String userName, String pw) {
+        List<Buyer> buyers = template.query("SELECT *\n" +
+                "FROM users\n" +
+                "INNER JOIN buyer\n" +
+                "ON users.userName = buyer.userName\n" +
+                "where pw='"+pw+"' and buyer.userName= '"+userName+"';", new BuyerRowMapper());
+        if(buyers.size() == 0)
+            return null;
+        else
+            return buyers.get(0);
     }
 }

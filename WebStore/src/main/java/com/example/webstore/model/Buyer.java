@@ -6,4 +6,5 @@ public class Buyer extends User {
         this.email = email;
         this.pw = pw;
     }
+    public Buyer(){}
 }

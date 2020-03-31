@@ -6,4 +6,5 @@ public class StoreOwner extends User{
         this.email = email;
         this.pw = pw;
     }
+    public StoreOwner(){}
 }

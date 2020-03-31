@@ -1,5 +1,6 @@
 package com.example.webstore.api;
 
+import com.example.webstore.model.Buyer;
 import com.example.webstore.model.StoreOwner;
 import com.example.webstore.model.User;
 import com.example.webstore.service.StoreOwnerService;
@@ -22,9 +23,13 @@ public class StoreOwnerController {
         userService.insertUser(storeOwner);
         storeOwnerService.insertStoreOwner(storeOwner);
     }
+    @GetMapping(path = "/loginStoreOwner/{userName}/{pw}")
+    public StoreOwner loginStoreOwner(@PathVariable("userName") String userName, @PathVariable("pw") String pw){
+        return storeOwnerService.loginStoreOwner(userName,pw);
+    }
 
     @GetMapping(value = "/storeOwnerList")
-    public List<User> getStoreOwners() {
+    public List<StoreOwner> getStoreOwners() {
         return storeOwnerService.findAll();
     }
 

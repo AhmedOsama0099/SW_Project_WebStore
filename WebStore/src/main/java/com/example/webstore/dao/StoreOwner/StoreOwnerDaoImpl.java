@@ -1,6 +1,9 @@
 package com.example.webstore.dao.StoreOwner;
 
+import com.example.webstore.mapper.BuyerRowMapper;
+import com.example.webstore.mapper.StoreOwnerRowMapper;
 import com.example.webstore.mapper.UserRowMapper;
+import com.example.webstore.model.Buyer;
 import com.example.webstore.model.StoreOwner;
 import com.example.webstore.model.User;
 import org.springframework.dao.DataAccessException;
@@ -27,11 +30,11 @@ public class StoreOwnerDaoImpl implements StoreOwnerDao{
     NamedParameterJdbcTemplate template;
 
     @Override
-    public List<User> findAll() {
+    public List<StoreOwner> findAll() {
         return template.query("SELECT *\n" +
                 "FROM users\n" +
                 "INNER JOIN store_owner\n" +
-                "ON users.userName = store_owner.userName;", new UserRowMapper());
+                "ON users.userName = store_owner.userName;", new StoreOwnerRowMapper());
     }
 
     @Override
@@ -86,5 +89,18 @@ public class StoreOwnerDaoImpl implements StoreOwnerDao{
                 return ps.executeUpdate();
             }
         });
+    }
+
+    @Override
+    public StoreOwner loginStoreOwner(String userName, String pw) {
+        List<StoreOwner> buyers = template.query("SELECT *\n" +
+                "FROM users\n" +
+                "INNER JOIN store_owner\n" +
+                "ON users.userName = store_owner.userName\n" +
+                "where pw='"+pw+"' and store_owner.userName= '"+userName+"';", new StoreOwnerRowMapper());
+        if(buyers.size() == 0)
+            return null;
+        else
+            return buyers.get(0);
     }
 }

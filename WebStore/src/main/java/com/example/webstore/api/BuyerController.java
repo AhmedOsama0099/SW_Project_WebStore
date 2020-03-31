@@ -1,5 +1,6 @@
 package com.example.webstore.api;
 
+import com.example.webstore.model.Admin;
 import com.example.webstore.model.Buyer;
 import com.example.webstore.model.User;
 import com.example.webstore.service.BuyerService;
@@ -23,8 +24,12 @@ public class BuyerController {
         userService.insertUser(buyer);
         buyerService.insertBuyer(buyer);
     }
+    @GetMapping(path = "/loginBuyer/{userName}/{pw}")
+    public Buyer loginBuyer(@PathVariable("userName") String userName, @PathVariable("pw") String pw){
+        return buyerService.loginBuyer(userName,pw);
+    }
     @GetMapping(value = "/buyerList")
-    public List<User> getBuyers() {
+    public List<Buyer> getBuyers() {
         return buyerService.findAll();
     }
     @PutMapping(value = "/updateBuyer")

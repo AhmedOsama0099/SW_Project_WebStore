@@ -34,19 +34,7 @@ public class AdminDaoImpl implements AdminDao{
                 "ON users.userName = admin.userName;", new AdminRowMapper());
     }
 
-    @Override
-    public Admin getAdmin(String userName, String pw) {
-        List<Admin> admins = template.query("SELECT *\n" +
-                "FROM users\n" +
-                "INNER JOIN admin\n" +
-                "ON users.userName = admin.userName;", new AdminRowMapper());
-       /* if(admins.size() == 0)
-            return null;
-        else
-            return admins.get(0);*/
-        return admins.get(0);
 
-    }
 
     @Override
     public void insertAdmin(Admin admin) {
@@ -97,5 +85,19 @@ public class AdminDaoImpl implements AdminDao{
                 return ps.executeUpdate();
             }
         });
+    }
+    @Override
+    public Admin loginAdmin(String userName, String pw) {
+        List<Admin> admins = template.query("SELECT *\n" +
+                "FROM users\n" +
+                "INNER JOIN admin\n" +
+                "ON users.userName = admin.userName\n" +
+                "where pw='"+pw+"' and admin.userName= '"+userName+"';", new AdminRowMapper());
+        if(admins.size() == 0)
+            return null;
+        else
+            return admins.get(0);
+//        return admins.get(0);
+
     }
 }

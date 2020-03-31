@@ -8,7 +8,7 @@ import java.util.List;
 public interface AdminDao {
     List<Admin> findAll();
 
-    Admin getAdmin(String userName, String pw);
+    Admin loginAdmin(String userName, String pw);
     void insertAdmin(Admin admin);
     void updateAdmin(User admin);
     void executeUpdateAdmin(User admin);

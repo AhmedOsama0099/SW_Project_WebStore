@@ -11,13 +11,17 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class BuyerService{
+public class BuyerService {
 
     @Resource
     BuyerDao buyerDao;
 
-    public List<User> findAll() {
+    public List<Buyer> findAll() {
         return buyerDao.findAll();
+    }
+
+    public Buyer loginBuyer(String userName, String pw) {
+        return buyerDao.loginBuyer(userName, pw);
     }
 
     public void insertBuyer(Buyer buyer) {

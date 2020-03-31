@@ -13,10 +13,10 @@ public class StoreOwnerService{
     @Resource
     StoreOwnerDao storeOwnerDao;
 
-    public List<User> findAll() {
+    public List<StoreOwner> findAll() {
         return storeOwnerDao.findAll();
     }
-
+    public  StoreOwner loginStoreOwner(String userName,String pw){return  storeOwnerDao.loginStoreOwner(userName,pw);}
     public void insertStoreOwner(StoreOwner user) {
         storeOwnerDao.insertStoreOwner(user);
     }
