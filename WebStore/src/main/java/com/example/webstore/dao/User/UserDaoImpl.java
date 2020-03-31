@@ -29,7 +29,6 @@ public class UserDaoImpl implements UserDao {
     public List<User> findAll() {
         return template.query("select * from users", new UserRowMapper());
     }
-
     @Override
     public void insertUser(User user) {
         final String sql = "insert into users(userName,email , pw) values(:userName,:email,:pw)";
@@ -66,6 +65,13 @@ public class UserDaoImpl implements UserDao {
                 return ps.executeUpdate();
             }
         });
+    }
+
+    @Override
+    public User getUserByUserName(String userName) {
+        List<User>users= template.query("select * from users where userName='"+userName+"'", new UserRowMapper());
+        if(users.isEmpty())return null;
+        else return users.get(0);
     }
 
     @Override

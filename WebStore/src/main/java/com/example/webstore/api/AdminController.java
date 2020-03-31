@@ -1,8 +1,8 @@
 package com.example.webstore.api;
 
-import com.example.webstore.UserNotfoundException;
+import com.example.webstore.Exceptions.login.LoginUserNotFoundException;
+import com.example.webstore.Exceptions.signUp.SignUpUserNotFoundException;
 import com.example.webstore.model.Admin;
-import com.example.webstore.model.User;
 import com.example.webstore.service.AdminService;
 import com.example.webstore.service.UserService;
 import org.springframework.web.bind.annotation.*;
@@ -19,16 +19,24 @@ public class AdminController {
     UserService userService;
 
     @PostMapping(value = "/createAdmin")
-    public void addAdmin(@RequestBody Admin admin) {
-        userService.insertUser(admin);
-        adminService.insertAdmin(admin);
+    public String addAdmin(@RequestBody Admin admin) {
+
+        if(userService.getUserByUserName(admin.getUserName())!=null){
+            throw new SignUpUserNotFoundException();
+        }
+        else{
+            userService.insertUser(admin);
+            adminService.insertAdmin(admin);
+            return "SignUp Successfully";
+        }
+
     }
 
     @GetMapping(path = "/loginAdmin/{userName}/{pw}")
     public Admin loginAdmin(@PathVariable("userName") String userName, @PathVariable("pw") String pw){
         Admin admin=adminService.loginAdmin(userName,pw);
         if(admin==null){
-            throw new UserNotfoundException();
+            throw new LoginUserNotFoundException();
         }
         return admin;
     }

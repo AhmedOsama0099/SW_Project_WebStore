@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class UserService{
+public class UserService {
     @Resource
     UserDao userDao;
 
@@ -20,21 +20,21 @@ public class UserService{
 
     public void insertUser(User user) {
         userDao.insertUser(user);
+    }
 
+    public User getUserByUserName(String userName) {
+        return userDao.getUserByUserName(userName);
     }
 
     public void updateUser(User user) {
         userDao.updateUser(user);
-
     }
 
     public void executeUpdateUser(User user) {
         userDao.executeUpdateUser(user);
-
     }
 
     public void deleteUser(User user) {
         userDao.deleteUser(user);
-
     }
 }
