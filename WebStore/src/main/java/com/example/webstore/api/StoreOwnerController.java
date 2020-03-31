@@ -43,18 +43,12 @@ public class StoreOwnerController {
         return storeOwnerService.findAll();
     }
 
-    @PutMapping(value = "/updateStoreOwner")
+    /*@PutMapping(value = "/updateStoreOwner")
     public void updateStoreOwner(@RequestBody StoreOwner storeOwner) {
         storeOwnerService.updateStoreOwner(storeOwner);
     }
-
-    @PutMapping(value = "/executeUpdateStoreOwner")
-    public void executeUpdateStoreOwner(@RequestBody StoreOwner storeOwner) {
-        storeOwnerService.executeUpdateStoreOwner(storeOwner);
-    }
-
     @DeleteMapping(value = "/deleteStoreOwner")
     public void deleteStoreOwner(@RequestBody StoreOwner storeOwner) {
         userService.deleteUser(storeOwner);
-    }
+    }*/
 }

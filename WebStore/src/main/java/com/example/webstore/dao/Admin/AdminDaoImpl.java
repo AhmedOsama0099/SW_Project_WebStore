@@ -46,7 +46,7 @@ public class AdminDaoImpl implements AdminDao{
         template.update(sql, param, holder);
     }
 
-    @Override
+   /* @Override
     public void updateAdmin(User admin) {
         final String sql = "update users set userName=:userName, email=:email, pw=:pw where userName=:userName";
         KeyHolder holder = new GeneratedKeyHolder();
@@ -56,23 +56,6 @@ public class AdminDaoImpl implements AdminDao{
                 .addValue("pw", admin.getPw());
         template.update(sql, param, holder);
     }
-
-    @Override
-    public void executeUpdateAdmin(User admin) {
-        final String sql = "update users set userName=:userName, email=:email, pw=:pw where userName=:userName";
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("email", admin.getEmail());
-        map.put("userName", admin.getUserName());
-        map.put("pw", admin.getPw());
-        template.execute(sql, map, new PreparedStatementCallback<Object>() {
-            @Override
-            public Object doInPreparedStatement(PreparedStatement ps)
-                    throws SQLException, DataAccessException {
-                return ps.executeUpdate();
-            }
-        });
-    }
-
     @Override
     public void deleteAdmin(User admin) {
         final String sql = "delete from users where userName=:userName";
@@ -85,7 +68,7 @@ public class AdminDaoImpl implements AdminDao{
                 return ps.executeUpdate();
             }
         });
-    }
+    }*/
     @Override
     public Admin loginAdmin(String userName, String pw) {
         List<Admin> admins = template.query("SELECT *\n" +

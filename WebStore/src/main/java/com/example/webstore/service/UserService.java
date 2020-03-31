@@ -26,15 +26,10 @@ public class UserService {
         return userDao.getUserByUserName(userName);
     }
 
-    public void updateUser(User user) {
+  /*  public void updateUser(User user) {
         userDao.updateUser(user);
     }
-
-    public void executeUpdateUser(User user) {
-        userDao.executeUpdateUser(user);
-    }
-
     public void deleteUser(User user) {
         userDao.deleteUser(user);
-    }
+    }*/
 }

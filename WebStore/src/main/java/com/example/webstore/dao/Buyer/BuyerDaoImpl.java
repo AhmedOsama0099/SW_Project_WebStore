@@ -45,7 +45,7 @@ public class BuyerDaoImpl implements BuyerDao {
 
     }
 
-    @Override
+    /*@Override
     public void updateBuyer(User buyer) {
         final String sql = "update users set userName=:userName, email=:email, pw=:pw where userName=:userName";
         KeyHolder holder = new GeneratedKeyHolder();
@@ -56,21 +56,6 @@ public class BuyerDaoImpl implements BuyerDao {
         template.update(sql, param, holder);
     }
 
-    @Override
-    public void executeUpdateBuyer(User buyer) {
-        final String sql = "update users set userName=:userName, email=:email, pw=:pw where userName=:userName";
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("email", buyer.getEmail());
-        map.put("userName", buyer.getUserName());
-        map.put("pw", buyer.getPw());
-        template.execute(sql, map, new PreparedStatementCallback<Object>() {
-            @Override
-            public Object doInPreparedStatement(PreparedStatement ps)
-                    throws SQLException, DataAccessException {
-                return ps.executeUpdate();
-            }
-        });
-    }
 
     @Override
     public void deleteBuyer(User buyer) {
@@ -84,7 +69,7 @@ public class BuyerDaoImpl implements BuyerDao {
                 return ps.executeUpdate();
             }
         });
-    }
+    }*/
 
     @Override
     public Buyer loginBuyer(String userName, String pw) {

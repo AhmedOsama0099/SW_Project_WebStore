@@ -42,17 +42,12 @@ public class BuyerController {
     public List<Buyer> getBuyers() {
         return buyerService.findAll();
     }
-    @PutMapping(value = "/updateBuyer")
+    /*@PutMapping(value = "/updateBuyer")
     public void updateBuyer(@RequestBody Buyer buyer) {
         buyerService.updateBuyer(buyer);
     }
-    @PutMapping(value = "/executeUpdateBuyer")
-    public void executeUpdateBuyer(@RequestBody Buyer buyer) {
-        buyerService.executeUpdateBuyer(buyer);
-    }
-
     @DeleteMapping(value = "/deleteBuyer")
     public void deleteBuyere(@RequestBody Buyer buyer) {
         userService.deleteUser(buyer);
-    }
+    }*/
 }

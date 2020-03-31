@@ -13,9 +13,10 @@ public class AdminService {
     @Resource
     AdminDao adminDao;
 
-    public Admin loginAdmin(String userName, String pw){
+    public Admin loginAdmin(String userName, String pw) {
         return adminDao.loginAdmin(userName, pw);
     }
+
     public List<Admin> findAll() {
         return adminDao.findAll();
     }
@@ -24,15 +25,11 @@ public class AdminService {
         adminDao.insertAdmin(admin);
     }
 
-    public void updateAdmin(Admin admin) {
+    /*public void updateAdmin(Admin admin) {
         adminDao.updateAdmin(admin);
-    }
-
-    public void executeUpdateAdmin(Admin admin) {
-        adminDao.executeUpdateAdmin(admin);
     }
 
     public void deleteAdmin(Admin admin) {
         adminDao.deleteAdmin(admin);
-    }
+    }*/
 }

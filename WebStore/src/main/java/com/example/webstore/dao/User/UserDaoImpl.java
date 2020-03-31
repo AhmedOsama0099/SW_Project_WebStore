@@ -29,6 +29,7 @@ public class UserDaoImpl implements UserDao {
     public List<User> findAll() {
         return template.query("select * from users", new UserRowMapper());
     }
+
     @Override
     public void insertUser(User user) {
         final String sql = "insert into users(userName,email , pw) values(:userName,:email,:pw)";
@@ -40,7 +41,7 @@ public class UserDaoImpl implements UserDao {
         template.update(sql, param, holder);
     }
 
-    @Override
+   /* @Override
     public void updateUser(User user) {
         final String sql = "update users set userName=:userName, email=:email, pw=:pw where userName=:userName";
         KeyHolder holder = new GeneratedKeyHolder();
@@ -51,28 +52,6 @@ public class UserDaoImpl implements UserDao {
         template.update(sql, param, holder);
     }
 
-    @Override
-    public void executeUpdateUser(User user) {
-        final String sql = "update users set userName=:userName, email=:email, pw=:pw where userName=:userName";
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("email", user.getEmail());
-        map.put("userName", user.getUserName());
-        map.put("pw", user.getPw());
-        template.execute(sql, map, new PreparedStatementCallback<Object>() {
-            @Override
-            public Object doInPreparedStatement(PreparedStatement ps)
-                    throws SQLException, DataAccessException {
-                return ps.executeUpdate();
-            }
-        });
-    }
-
-    @Override
-    public User getUserByUserName(String userName) {
-        List<User>users= template.query("select * from users where userName='"+userName+"'", new UserRowMapper());
-        if(users.isEmpty())return null;
-        else return users.get(0);
-    }
 
     @Override
     public void deleteUser(User user) {
@@ -86,5 +65,12 @@ public class UserDaoImpl implements UserDao {
                 return ps.executeUpdate();
             }
         });
+    }*/
+
+    @Override
+    public User getUserByUserName(String userName) {
+        List<User> users = template.query("select * from users where userName='" + userName + "'", new UserRowMapper());
+        if (users.isEmpty()) return null;
+        else return users.get(0);
     }
 }

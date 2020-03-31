@@ -21,21 +21,19 @@ public class AdminController {
     @PostMapping(value = "/createAdmin")
     public String addAdmin(@RequestBody Admin admin) {
 
-        if(userService.getUserByUserName(admin.getUserName())!=null){
+        if (userService.getUserByUserName(admin.getUserName()) != null) {
             throw new SignUpUserNotFoundException();
-        }
-        else{
+        } else {
             userService.insertUser(admin);
             adminService.insertAdmin(admin);
             return "SignUp Successfully";
         }
-
     }
 
     @GetMapping(path = "/loginAdmin/{userName}/{pw}")
-    public Admin loginAdmin(@PathVariable("userName") String userName, @PathVariable("pw") String pw){
-        Admin admin=adminService.loginAdmin(userName,pw);
-        if(admin==null){
+    public Admin loginAdmin(@PathVariable("userName") String userName, @PathVariable("pw") String pw) {
+        Admin admin = adminService.loginAdmin(userName, pw);
+        if (admin == null) {
             throw new LoginUserNotFoundException();
         }
         return admin;
@@ -46,18 +44,12 @@ public class AdminController {
         return adminService.findAll();
     }
 
-    @PutMapping(value = "/updateAdmin")
+/*    @PutMapping(value = "/updateAdmin")
     public void updateAdmin(@RequestBody Admin admin) {
         adminService.updateAdmin(admin);
     }
-
-    @PutMapping(value = "/executeUpdateAdmin")
-    public void executeUpdateAdmin(@RequestBody Admin admin) {
-        adminService.executeUpdateAdmin(admin);
-    }
-
     @DeleteMapping(value = "/deleteAdmin")
     public void deleteAdmin(@RequestBody Admin admin) {
         userService.deleteUser(admin);
-    }
+    }*/
 }

@@ -6,11 +6,13 @@ import com.example.webstore.model.User;
 import java.util.List;
 
 public interface AdminDao {
+    Admin loginAdmin(String userName, String pw);
+
     List<Admin> findAll();
 
-    Admin loginAdmin(String userName, String pw);
     void insertAdmin(Admin admin);
-    void updateAdmin(User admin);
-    void executeUpdateAdmin(User admin);
-    public void deleteAdmin(User admin);
+
+    //void updateAdmin(User admin);
+
+    //void deleteAdmin(User admin);
 }

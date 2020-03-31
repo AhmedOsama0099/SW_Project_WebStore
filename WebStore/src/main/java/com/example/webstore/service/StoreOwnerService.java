@@ -9,27 +9,28 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Component
-public class StoreOwnerService{
+public class StoreOwnerService {
     @Resource
     StoreOwnerDao storeOwnerDao;
 
     public List<StoreOwner> findAll() {
         return storeOwnerDao.findAll();
     }
-    public  StoreOwner loginStoreOwner(String userName,String pw){return  storeOwnerDao.loginStoreOwner(userName,pw);}
+
+    public StoreOwner loginStoreOwner(String userName, String pw) {
+        return storeOwnerDao.loginStoreOwner(userName, pw);
+    }
+
     public void insertStoreOwner(StoreOwner user) {
         storeOwnerDao.insertStoreOwner(user);
     }
 
-    public void updateStoreOwner(StoreOwner user) {
+    /*public void updateStoreOwner(StoreOwner user) {
         storeOwnerDao.updateStoreOwner(user);
     }
 
-    public void executeUpdateStoreOwner(StoreOwner user) {
-        storeOwnerDao.executeUpdateStoreOwner(user);
-    }
 
     public void deleteStoreOwner(StoreOwner user) {
         storeOwnerDao.deleteStoreOwner(user);
-    }
+    }*/
 }

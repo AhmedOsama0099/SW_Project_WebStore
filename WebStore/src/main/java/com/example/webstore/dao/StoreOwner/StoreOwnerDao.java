@@ -6,11 +6,14 @@ import com.example.webstore.model.User;
 import java.util.List;
 
 public interface StoreOwnerDao {
-    List<StoreOwner> findAll();
-    void insertStoreOwner(StoreOwner storeOwner);
-    void updateStoreOwner(User storeOwner);
-    void executeUpdateStoreOwner(User storeOwner);
-    public void deleteStoreOwner(User storeOwner);
-
     StoreOwner loginStoreOwner(String userName, String pw);
+
+    List<StoreOwner> findAll();
+
+    void insertStoreOwner(StoreOwner storeOwner);
+
+    //void updateStoreOwner(User storeOwner);
+
+    //void deleteStoreOwner(User storeOwner);
+
 }

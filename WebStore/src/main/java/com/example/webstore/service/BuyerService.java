@@ -28,15 +28,12 @@ public class BuyerService {
         buyerDao.insertBuyer(buyer);
     }
 
-    public void updateBuyer(Buyer buyer) {
+   /* public void updateBuyer(Buyer buyer) {
         buyerDao.updateBuyer(buyer);
     }
 
-    public void executeUpdateBuyer(Buyer buyer) {
-        buyerDao.executeUpdateBuyer(buyer);
-    }
 
     public void deleteBuyer(Buyer buyer) {
         buyerDao.deleteBuyer(buyer);
-    }
+    }*/
 }

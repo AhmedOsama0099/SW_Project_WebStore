@@ -48,7 +48,7 @@ public class StoreOwnerDaoImpl implements StoreOwnerDao{
 
     }
 
-    @Override
+   /* @Override
     public void updateStoreOwner(User storeOwner) {
         final String sql = "update users set userName=:userName, email=:email, pw=:pw where userName=:userName";
         KeyHolder holder = new GeneratedKeyHolder();
@@ -57,23 +57,6 @@ public class StoreOwnerDaoImpl implements StoreOwnerDao{
                 .addValue("userName", storeOwner.getUserName())
                 .addValue("pw", storeOwner.getPw());
         template.update(sql, param, holder);
-
-    }
-
-    @Override
-    public void executeUpdateStoreOwner(User storeOwner) {
-        final String sql = "update users set userName=:userName, email=:email, pw=:pw where userName=:userName";
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("email", storeOwner.getEmail());
-        map.put("userName", storeOwner.getUserName());
-        map.put("pw", storeOwner.getPw());
-        template.execute(sql, map, new PreparedStatementCallback<Object>() {
-            @Override
-            public Object doInPreparedStatement(PreparedStatement ps)
-                    throws SQLException, DataAccessException {
-                return ps.executeUpdate();
-            }
-        });
 
     }
 
@@ -89,7 +72,7 @@ public class StoreOwnerDaoImpl implements StoreOwnerDao{
                 return ps.executeUpdate();
             }
         });
-    }
+    }*/
 
     @Override
     public StoreOwner loginStoreOwner(String userName, String pw) {
