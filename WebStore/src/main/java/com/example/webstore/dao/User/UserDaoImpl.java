@@ -1,7 +1,6 @@
-package com.example.webstore.deo.Buyer;
+package com.example.webstore.dao.User;
 
 import com.example.webstore.mapper.UserRowMapper;
-import com.example.webstore.model.Buyer;
 import com.example.webstore.model.User;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.PreparedStatementCallback;
@@ -19,8 +18,8 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class BuyerDaoImpl implements BuyerDao {
-    public BuyerDaoImpl(NamedParameterJdbcTemplate template) {
+public class UserDaoImpl implements UserDao {
+    public UserDaoImpl(NamedParameterJdbcTemplate template) {
         this.template = template;
     }
 
@@ -28,23 +27,22 @@ public class BuyerDaoImpl implements BuyerDao {
 
     @Override
     public List<User> findAll() {
-        return template.query("select * from users ", new UserRowMapper());
+        return template.query("select * from users", new UserRowMapper());
     }
 
     @Override
-    public void insertEmployee(Buyer user) {
-        final String sql = "insert into buyer(userName) values(:userName)";
+    public void insertUser(User user) {
+        final String sql = "insert into users(userName,email , pw) values(:userName,:email,:pw)";
         KeyHolder holder = new GeneratedKeyHolder();
         SqlParameterSource param = new MapSqlParameterSource()
-                .addValue("userName", user.getUserName());
-
+                .addValue("userName", user.getUserName())
+                .addValue("email", user.getEmail())
+                .addValue("pw", user.getPw());
         template.update(sql, param, holder);
-
-
     }
 
     @Override
-    public void updateEmployee(User user) {
+    public void updateUser(User user) {
         final String sql = "update users set userName=:userName, email=:email, pw=:pw where userName=:userName";
         KeyHolder holder = new GeneratedKeyHolder();
         SqlParameterSource param = new MapSqlParameterSource()
@@ -55,7 +53,7 @@ public class BuyerDaoImpl implements BuyerDao {
     }
 
     @Override
-    public void executeUpdateEmployee(User user) {
+    public void executeUpdateUser(User user) {
         final String sql = "update users set userName=:userName, email=:email, pw=:pw where userName=:userName";
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("email", user.getEmail());
@@ -71,7 +69,7 @@ public class BuyerDaoImpl implements BuyerDao {
     }
 
     @Override
-    public void deleteEmployee(User user) {
+    public void deleteUser(User user) {
         final String sql = "delete from users where userName=:userName";
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("userName", user.getUserName());

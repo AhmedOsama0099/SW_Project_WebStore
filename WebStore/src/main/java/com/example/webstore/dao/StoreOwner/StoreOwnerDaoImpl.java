@@ -1,6 +1,7 @@
-package com.example.webstore.deo.User;
+package com.example.webstore.dao.StoreOwner;
 
 import com.example.webstore.mapper.UserRowMapper;
+import com.example.webstore.model.StoreOwner;
 import com.example.webstore.model.User;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.PreparedStatementCallback;
@@ -18,8 +19,8 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class UserDaoImpl implements UserDao {
-    public UserDaoImpl(NamedParameterJdbcTemplate template) {
+public class StoreOwnerDaoImpl implements StoreOwnerDao{
+    public StoreOwnerDaoImpl(NamedParameterJdbcTemplate template) {
         this.template = template;
     }
 
@@ -27,38 +28,42 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> findAll() {
-        return template.query("select * from users", new UserRowMapper());
+        return template.query("SELECT *\n" +
+                "FROM users\n" +
+                "INNER JOIN store_owner\n" +
+                "ON users.userName = store_owner.userName;", new UserRowMapper());
     }
 
     @Override
-    public void insertEmployee(User user) {
-        final String sql = "insert into users(userName,email , pw) values(:userName,:email,:pw)";
+    public void insertStoreOwner(StoreOwner storeOwner) {
+        final String sql = "insert into store_owner(userName) values(:userName)";
         KeyHolder holder = new GeneratedKeyHolder();
         SqlParameterSource param = new MapSqlParameterSource()
-                .addValue("userName", user.getUserName())
-                .addValue("email", user.getEmail())
-                .addValue("pw", user.getPw());
+                .addValue("userName", storeOwner.getUserName());
+
         template.update(sql, param, holder);
+
     }
 
     @Override
-    public void updateEmployee(User user) {
+    public void updateStoreOwner(User storeOwner) {
         final String sql = "update users set userName=:userName, email=:email, pw=:pw where userName=:userName";
         KeyHolder holder = new GeneratedKeyHolder();
         SqlParameterSource param = new MapSqlParameterSource()
-                .addValue("email", user.getEmail())
-                .addValue("userName", user.getUserName())
-                .addValue("pw", user.getPw());
+                .addValue("email", storeOwner.getEmail())
+                .addValue("userName", storeOwner.getUserName())
+                .addValue("pw", storeOwner.getPw());
         template.update(sql, param, holder);
+
     }
 
     @Override
-    public void executeUpdateEmployee(User user) {
+    public void executeUpdateStoreOwner(User storeOwner) {
         final String sql = "update users set userName=:userName, email=:email, pw=:pw where userName=:userName";
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("email", user.getEmail());
-        map.put("userName", user.getUserName());
-        map.put("pw", user.getPw());
+        map.put("email", storeOwner.getEmail());
+        map.put("userName", storeOwner.getUserName());
+        map.put("pw", storeOwner.getPw());
         template.execute(sql, map, new PreparedStatementCallback<Object>() {
             @Override
             public Object doInPreparedStatement(PreparedStatement ps)
@@ -66,13 +71,14 @@ public class UserDaoImpl implements UserDao {
                 return ps.executeUpdate();
             }
         });
+
     }
 
     @Override
-    public void deleteEmployee(User user) {
+    public void deleteStoreOwner(User storeOwner) {
         final String sql = "delete from users where userName=:userName";
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("userName", user.getUserName());
+        map.put("userName", storeOwner.getUserName());
         template.execute(sql, map, new PreparedStatementCallback<Object>() {
             @Override
             public Object doInPreparedStatement(PreparedStatement ps)

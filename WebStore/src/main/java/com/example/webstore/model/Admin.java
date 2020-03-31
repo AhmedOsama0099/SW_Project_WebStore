@@ -6,4 +6,8 @@ public class Admin extends User {
         this.email = email;
         this.pw = pw;
     }
+
+    public Admin(){
+
+    }
 }

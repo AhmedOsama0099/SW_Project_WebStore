@@ -1,8 +1,6 @@
 package com.example.webstore.model;
 
-import java.util.UUID;
-
-public  class User {
+public class User {
     public void setUserName(String userName) {
         this.userName = userName;
     }
