@@ -31,21 +31,24 @@ public class AdminController {
         }
     }
 
-    @GetMapping(path = "/loginAdmin/{userName}/{pw}")
-    public Admin loginAdmin(@PathVariable("userName") String userName, @PathVariable("pw") String pw) {
-        Admin admin = adminService.loginAdmin(userName, pw);
-        if (admin == null) {
+    @PostMapping(value = "/loginAdmin")
+    public Admin loginAdmin(@RequestBody Admin admin) {
+        Admin tmp = adminService.loginAdmin(admin.getUserName(), admin.getPw());
+        if (tmp == null) {
             throw new LoginUserNotFoundException();
         }
-        return admin;
+        return tmp;
     }
 
     @GetMapping(value = "/adminList")
     public List<Admin> getAdmins() {
         return adminService.findAll();
     }
+
     @GetMapping(value = "/getAllUsersList")
-    public List<User>getAllUsers(){return userService.findAll();}
+    public List<User> getAllUsers() {
+        return userService.findAll();
+    }
 /*    @PutMapping(value = "/updateAdmin")
     public void updateAdmin(@RequestBody Admin admin) {
         adminService.updateAdmin(admin);

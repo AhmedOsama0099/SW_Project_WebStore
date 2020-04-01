@@ -30,13 +30,13 @@ public class BuyerController {
             return "SignUp Successfully";
         }
     }
-    @GetMapping(path = "/loginBuyer/{userName}/{pw}")
-    public Buyer loginBuyer(@PathVariable("userName") String userName, @PathVariable("pw") String pw){
-        Buyer buyer=buyerService.loginBuyer(userName,pw);
-        if(buyer==null){
+    @PostMapping(value = "/loginBuyer")
+    public Buyer loginBuyer(@RequestBody Buyer buyer){
+        Buyer tmp=buyerService.loginBuyer(buyer.getUserName(),buyer.getPw());
+        if(tmp==null){
             throw  new LoginUserNotFoundException();
         }
-        return buyer;
+        return tmp;
     }
     @GetMapping(value = "/buyerList")
     public List<Buyer> getBuyers() {

@@ -29,13 +29,13 @@ public class StoreOwnerController {
             return "SignUp Successfully";
         }
     }
-    @GetMapping(path = "/loginStoreOwner/{userName}/{pw}")
-    public StoreOwner loginStoreOwner(@PathVariable("userName") String userName, @PathVariable("pw") String pw){
-        StoreOwner storeOwner=storeOwnerService.loginStoreOwner(userName,pw);
-        if(storeOwner==null){
+    @PostMapping(path = "/loginStoreOwner")
+    public StoreOwner loginStoreOwner(@RequestBody StoreOwner storeOwner){
+        StoreOwner tmp=storeOwnerService.loginStoreOwner(storeOwner.getUserName(),storeOwner.getPw());
+        if(tmp==null){
             throw new LoginUserNotFoundException();
         }
-        return storeOwner;
+        return tmp;
     }
 
     @GetMapping(value = "/storeOwnerList")
