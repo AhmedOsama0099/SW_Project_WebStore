@@ -3,6 +3,7 @@ package com.example.webstore.api;
 import com.example.webstore.Exceptions.login.LoginUserNotFoundException;
 import com.example.webstore.Exceptions.signUp.SignUpUserNotFoundException;
 import com.example.webstore.model.Admin;
+import com.example.webstore.model.User;
 import com.example.webstore.service.AdminService;
 import com.example.webstore.service.UserService;
 import org.springframework.web.bind.annotation.*;
@@ -43,7 +44,8 @@ public class AdminController {
     public List<Admin> getAdmins() {
         return adminService.findAll();
     }
-
+    @GetMapping(value = "/getAllUsersList")
+    public List<User>getAllUsers(){return userService.findAll();}
 /*    @PutMapping(value = "/updateAdmin")
     public void updateAdmin(@RequestBody Admin admin) {
         adminService.updateAdmin(admin);
