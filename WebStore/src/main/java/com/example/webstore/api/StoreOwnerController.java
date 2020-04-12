@@ -1,7 +1,7 @@
 package com.example.webstore.api;
 
 import com.example.webstore.Exceptions.login.LoginUserNotFoundException;
-import com.example.webstore.Exceptions.signUp.SignUpUserNotFoundException;
+import com.example.webstore.Exceptions.signUp.SignUpUserFoundException;
 import com.example.webstore.model.StoreOwner;
 import com.example.webstore.service.StoreOwnerService;
 import com.example.webstore.service.UserService;
@@ -21,7 +21,7 @@ public class StoreOwnerController {
     @PostMapping(value = "/createStoreOwner")
     public String addStoreOwner(@RequestBody StoreOwner storeOwner) {
         if(userService.getUserByUserName(storeOwner.getUserName())!=null){
-            throw new SignUpUserNotFoundException();
+            throw new SignUpUserFoundException();
         }
         else{
             userService.insertUser(storeOwner);

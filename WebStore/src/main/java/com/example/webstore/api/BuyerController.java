@@ -1,7 +1,7 @@
 package com.example.webstore.api;
 
 import com.example.webstore.Exceptions.login.LoginUserNotFoundException;
-import com.example.webstore.Exceptions.signUp.SignUpUserNotFoundException;
+import com.example.webstore.Exceptions.signUp.SignUpUserFoundException;
 import com.example.webstore.model.Buyer;
 import com.example.webstore.service.BuyerService;
 import com.example.webstore.service.UserService;
@@ -22,7 +22,7 @@ public class BuyerController {
     @PostMapping(value = "/createBuyer")
     public String addBuyer(@RequestBody Buyer buyer) {
         if(userService.getUserByUserName(buyer.getUserName())!=null){
-            throw new SignUpUserNotFoundException();
+            throw new SignUpUserFoundException();
         }
         else{
             userService.insertUser(buyer);

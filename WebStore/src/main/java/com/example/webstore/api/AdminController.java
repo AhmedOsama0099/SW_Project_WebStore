@@ -1,7 +1,7 @@
 package com.example.webstore.api;
 
 import com.example.webstore.Exceptions.login.LoginUserNotFoundException;
-import com.example.webstore.Exceptions.signUp.SignUpUserNotFoundException;
+import com.example.webstore.Exceptions.signUp.SignUpUserFoundException;
 import com.example.webstore.model.Admin;
 import com.example.webstore.model.User;
 import com.example.webstore.service.AdminService;
@@ -23,7 +23,7 @@ public class AdminController {
     public String addAdmin(@RequestBody Admin admin) {
 
         if (userService.getUserByUserName(admin.getUserName()) != null) {
-            throw new SignUpUserNotFoundException();
+            throw new SignUpUserFoundException();
         } else {
             userService.insertUser(admin);
             adminService.insertAdmin(admin);
@@ -49,6 +49,9 @@ public class AdminController {
     public List<User> getAllUsers() {
         return userService.findAll();
     }
+    @RequestMapping("/hello")
+    public String helloWorld(@RequestParam(value="name", defaultValue="World") String name) {
+        return "Hello "+name+"!!";}
 /*    @PutMapping(value = "/updateAdmin")
     public void updateAdmin(@RequestBody Admin admin) {
         adminService.updateAdmin(admin);
