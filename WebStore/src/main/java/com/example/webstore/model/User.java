@@ -13,6 +13,10 @@ public class User {
         this.pw = pw;
     }
 
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     public String getUserName() {
         return userName;
     }
@@ -25,10 +29,14 @@ public class User {
         return pw;
     }
 
+    public String getToken() {
+        return token;
+    }
+
     protected String userName;
     protected String email;
     protected String pw;
-
+    protected String token;
     public User() {
 
     }
