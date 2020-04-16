@@ -6,11 +6,11 @@ import com.example.webstore.model.User;
 import java.util.List;
 
 public interface AdminDao {
-    Admin loginAdmin(String userName, String pw);
+    //Admin loginAdmin(String userName, String pw);
 
     List<Admin> findAll();
 
-    void insertAdmin(Admin admin);
+    //void insertAdmin(Admin admin);
 
     //void updateAdmin(User admin);
 

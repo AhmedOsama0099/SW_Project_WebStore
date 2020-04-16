@@ -5,19 +5,20 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import com.example.webstore.dao.User.UserDao;
+import com.example.webstore.dao.User.UserDaoImpl;
 import com.example.webstore.model.User;
 import org.springframework.stereotype.Component;
 
 
 @Component
-public class UserService {
+public class UserService implements CommonServiceInt {
     @Resource
-    UserDao userDao;
+    UserDaoImpl userDao;
 
     public List<User> findAll() {
         return userDao.findAll();
     }
-
+    @Override
     public void insertUser(User user) {
         userDao.insertUser(user);
     }

@@ -1,5 +1,8 @@
 package com.example.webstore.model;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 public class User {
     public void setUserName(String userName) {
         this.userName = userName;
@@ -13,9 +16,9 @@ public class User {
         this.pw = pw;
     }
 
-    public void setToken(String token) {
+    /*public void setToken(String token) {
         this.token = token;
-    }
+    }*/
 
     public String getUserName() {
         return userName;
@@ -29,14 +32,16 @@ public class User {
         return pw;
     }
 
-    public String getToken() {
+    /*public String getToken() {
         return token;
-    }
+    }*/
 
     protected String userName;
+    @NotBlank
+    @Email
     protected String email;
     protected String pw;
-    protected String token;
+    //protected String token;
     public User() {
 
     }

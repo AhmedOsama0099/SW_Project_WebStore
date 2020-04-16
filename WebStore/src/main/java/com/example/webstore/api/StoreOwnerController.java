@@ -18,37 +18,39 @@ public class StoreOwnerController {
     @Resource
     UserService userService;
 
-    @PostMapping(value = "/createStoreOwner")
+    /*@PostMapping(value = "/createStoreOwner")
     public String addStoreOwner(@RequestBody StoreOwner storeOwner) {
-        if(userService.getUserByUserName(storeOwner.getUserName())!=null){
+        if (userService.getUserByUserName(storeOwner.getUserName()) != null) {
             throw new SignUpUserFoundException();
-        }
-        else{
+        } else {
             userService.insertUser(storeOwner);
             storeOwnerService.insertStoreOwner(storeOwner);
             return "SignUp Successfully";
         }
     }
+
     @PostMapping(path = "/loginStoreOwner")
-    public StoreOwner loginStoreOwner(@RequestBody StoreOwner storeOwner){
-        StoreOwner tmp=storeOwnerService.loginStoreOwner(storeOwner.getUserName(),storeOwner.getPw());
-        if(tmp==null){
+    public StoreOwner loginStoreOwner(@RequestBody StoreOwner storeOwner) {
+        StoreOwner tmp = storeOwnerService.loginStoreOwner(storeOwner.getUserName(), storeOwner.getPw());
+        if (tmp == null) {
             throw new LoginUserNotFoundException();
         }
         return tmp;
-    }
+    }*/
 
     @GetMapping(value = "/storeOwnerList")
     public List<StoreOwner> getStoreOwners() {
         return storeOwnerService.findAll();
     }
 
-    /*@PutMapping(value = "/updateStoreOwner")
+   /* @PutMapping(value = "/updateStoreOwner")
     public void updateStoreOwner(@RequestBody StoreOwner storeOwner) {
         storeOwnerService.updateStoreOwner(storeOwner);
     }
+
     @DeleteMapping(value = "/deleteStoreOwner")
     public void deleteStoreOwner(@RequestBody StoreOwner storeOwner) {
         userService.deleteUser(storeOwner);
     }*/
+
 }

@@ -1,5 +1,7 @@
 package com.example.webstore.dao.StoreOwner;
 
+import com.example.webstore.dao.User.UserDaoImpl;
+import com.example.webstore.dao.UserDaoCommon;
 import com.example.webstore.mapper.BuyerRowMapper;
 import com.example.webstore.mapper.StoreOwnerRowMapper;
 import com.example.webstore.mapper.UserRowMapper;
@@ -15,6 +17,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.Resource;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -22,7 +25,9 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class StoreOwnerDaoImpl implements StoreOwnerDao{
+public class StoreOwnerDaoImpl implements StoreOwnerDao, UserDaoCommon {
+    @Resource
+    UserDaoImpl userDao;
     public StoreOwnerDaoImpl(NamedParameterJdbcTemplate template) {
         this.template = template;
     }
@@ -37,7 +42,7 @@ public class StoreOwnerDaoImpl implements StoreOwnerDao{
                 "ON users.userName = store_owner.userName;", new StoreOwnerRowMapper());
     }
 
-    @Override
+    /*@Override
     public void insertStoreOwner(StoreOwner storeOwner) {
         final String sql = "insert into store_owner(userName) values(:userName)";
         KeyHolder holder = new GeneratedKeyHolder();
@@ -74,7 +79,7 @@ public class StoreOwnerDaoImpl implements StoreOwnerDao{
         });
     }*/
 
-    @Override
+   /* @Override
     public StoreOwner loginStoreOwner(String userName, String pw) {
         List<StoreOwner> buyers = template.query("SELECT *\n" +
                 "FROM users\n" +
@@ -85,5 +90,15 @@ public class StoreOwnerDaoImpl implements StoreOwnerDao{
             return null;
         else
             return buyers.get(0);
+    }*/
+
+    @Override
+    public void insertUser(User user) {
+        userDao.insertUser(user);
+        final String sql = "insert into store_owner(userName) values(:userName)";
+        KeyHolder holder = new GeneratedKeyHolder();
+        SqlParameterSource param = new MapSqlParameterSource()
+                .addValue("userName", user.getUserName());
+        template.update(sql, param, holder);
     }
 }

@@ -5,27 +5,29 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import com.example.webstore.dao.Buyer.BuyerDao;
+import com.example.webstore.dao.Buyer.BuyerDaoImpl;
 import com.example.webstore.model.Buyer;
 import com.example.webstore.model.User;
 import org.springframework.stereotype.Component;
 
 
 @Component
-public class BuyerService {
+public class BuyerService implements CommonServiceInt{
 
-    @Resource
-    BuyerDao buyerDao;
+   @Resource
+    BuyerDaoImpl buyerDao;
 
     public List<Buyer> findAll() {
         return buyerDao.findAll();
     }
 
-    public Buyer loginBuyer(String userName, String pw) {
+    /*public Buyer loginBuyer(String userName, String pw) {
         return buyerDao.loginBuyer(userName, pw);
-    }
+    }*/
 
-    public void insertBuyer(Buyer buyer) {
-        buyerDao.insertBuyer(buyer);
+    @Override
+    public void insertUser(User user) {
+        buyerDao.insertUser(user);
     }
 
    /* public void updateBuyer(Buyer buyer) {

@@ -1,5 +1,7 @@
 package com.example.webstore.dao.User;
 
+import com.example.webstore.dao.UserDaoCommon;
+import com.example.webstore.mapper.AdminRowMapper;
 import com.example.webstore.mapper.UserRowMapper;
 import com.example.webstore.model.User;
 import org.springframework.dao.DataAccessException;
@@ -13,12 +15,10 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Repository
-public class UserDaoImpl implements UserDao {
+public class UserDaoImpl implements UserDao, UserDaoCommon {
     public UserDaoImpl(NamedParameterJdbcTemplate template) {
         this.template = template;
     }
@@ -39,6 +39,30 @@ public class UserDaoImpl implements UserDao {
                 .addValue("email", user.getEmail())
                 .addValue("pw", user.getPw());
         template.update(sql, param, holder);
+    }
+
+    public String getUserRoles(String userName) {
+        ArrayList<String> roles = new ArrayList<>();
+        if (!template.query("SELECT *\n" +
+                "FROM users\n" +
+                "INNER JOIN admin\n" +
+                "ON users.userName = admin.userName\n" +
+                "where admin.userName= '" + userName + "';", new AdminRowMapper()).isEmpty())
+            roles.add("admin");
+
+        else if (!template.query("SELECT *\n" +
+                "FROM users\n" +
+                "INNER JOIN buyer\n" +
+                "ON users.userName = buyer.userName\n" +
+                "where buyer.userName= '" + userName + "';", new AdminRowMapper()).isEmpty())
+            roles.add("buyer");
+        else if (!template.query("SELECT *\n" +
+                "FROM users\n" +
+                "INNER JOIN store_owner\n" +
+                "ON users.userName = store_owner.userName\n" +
+                "where store_owner.userName= '" + userName + "';", new AdminRowMapper()).isEmpty())
+            roles.add("store_owner");
+        return roles.get(0);
     }
 
    /* @Override

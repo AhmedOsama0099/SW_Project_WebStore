@@ -6,11 +6,11 @@ import com.example.webstore.model.User;
 import java.util.List;
 
 public interface StoreOwnerDao {
-    StoreOwner loginStoreOwner(String userName, String pw);
+    //StoreOwner loginStoreOwner(String userName, String pw);
 
     List<StoreOwner> findAll();
 
-    void insertStoreOwner(StoreOwner storeOwner);
+    //void insertStoreOwner(StoreOwner storeOwner);
 
     //void updateStoreOwner(User storeOwner);
 

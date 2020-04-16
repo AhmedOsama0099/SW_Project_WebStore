@@ -1,0 +1,36 @@
+version: "3"
+services:
+  postgres:
+    image: 11993377/mypostgres:latest
+    network_mode: bridge
+    container_name: postgres1
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    expose:
+      - 5432
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=11993377
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+    # restart: unless-stopped
+  # APP*****************************************
+  webstore:
+    image: 11993377/myimage:latest
+    #build: .
+    network_mode: bridge
+    container_name: web
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/postgres
+    expose:
+      - 8080
+    ports:
+      - 8080:8080
+    # restart: unless-stopped
+    depends_on:
+      - postgres
+    links:
+      - postgres
+volumes:
+  postgres-data:

@@ -1,18 +1,25 @@
 package com.example.webstore.dao.Admin;
 
+import com.example.webstore.dao.User.UserDaoImpl;
+import com.example.webstore.dao.UserDaoCommon;
 import com.example.webstore.mapper.AdminRowMapper;
 import com.example.webstore.model.Admin;
+import com.example.webstore.model.User;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+
+import javax.annotation.Resource;
 import java.util.List;
 
 
 @Repository
-public class AdminDaoImpl implements AdminDao {
+public class AdminDaoImpl implements AdminDao, UserDaoCommon {
+    @Resource
+    UserDaoImpl userDao;
     public AdminDaoImpl(NamedParameterJdbcTemplate template) {
         this.template = template;
     }
@@ -28,7 +35,7 @@ public class AdminDaoImpl implements AdminDao {
     }
 
 
-    @Override
+    /*@Override
     public void insertAdmin(Admin admin) {
         final String sql = "insert into admin(userName) values(:userName)";
         KeyHolder holder = new GeneratedKeyHolder();
@@ -36,7 +43,7 @@ public class AdminDaoImpl implements AdminDao {
                 .addValue("userName", admin.getUserName());
 
         template.update(sql, param, holder);
-    }
+    }*/
 
     /* @Override
      public void updateAdmin(User admin) {
@@ -61,7 +68,8 @@ public class AdminDaoImpl implements AdminDao {
              }
          });
      }*/
-    @Override
+
+    /*@Override
     public Admin loginAdmin(String userName, String pw) {
         List<Admin> admins = template.query("SELECT *\n" +
                 "FROM users\n" +
@@ -74,6 +82,16 @@ public class AdminDaoImpl implements AdminDao {
             return admins.get(0);
 //        return admins.get(0);
 
-    }
+    }*/
 
+    @Override
+    public void insertUser(User user) {
+        userDao.insertUser(user);
+        final String sql = "insert into admin(userName) values(:userName)";
+        KeyHolder holder = new GeneratedKeyHolder();
+        SqlParameterSource param = new MapSqlParameterSource()
+                .addValue("userName", user.getUserName());
+
+        template.update(sql, param, holder);
+    }
 }
