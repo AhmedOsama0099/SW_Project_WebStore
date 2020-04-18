@@ -12,6 +12,4 @@ public class WebstoreApplication {
         SpringApplication.run(WebstoreApplication.class, args);
     }
 
-
-
 }
