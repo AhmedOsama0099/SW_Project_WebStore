@@ -1,7 +1,7 @@
 version: "3"
 services:
   postgres:
-    image: postgres:alpine
+    image: ahmedelsayed23/postgres:alpine
     network_mode: bridge
     container_name: postgres1
     volumes:
@@ -17,7 +17,7 @@ services:
     # restart: unless-stopped
   # APP*****************************************
   webstore:
-    image: webstore
+    image: ahmedelsayed23/webstore
     #build: .
     network_mode: bridge
     container_name: web
