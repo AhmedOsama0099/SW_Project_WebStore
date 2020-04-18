@@ -43,7 +43,7 @@ public class BuyerController {
     }*/
 
     @GetMapping(value = "/buyerList")
-    @Secured("admin")
+    @PreAuthorize("hasRole('ADMIN')")
     public List<Buyer> getBuyers() {
         return buyerService.findAll();
     }

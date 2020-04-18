@@ -5,6 +5,7 @@ import com.example.webstore.Exceptions.signUp.SignUpUserFoundException;
 import com.example.webstore.model.StoreOwner;
 import com.example.webstore.service.StoreOwnerService;
 import com.example.webstore.service.UserService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -39,6 +40,7 @@ public class StoreOwnerController {
     }*/
 
     @GetMapping(value = "/storeOwnerList")
+    @PreAuthorize("hasRole('ADMIN')")
     public List<StoreOwner> getStoreOwners() {
         return storeOwnerService.findAll();
     }

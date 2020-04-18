@@ -33,7 +33,7 @@ public class AdminController {
     PasswordEncoder encoder;
 
     @PostMapping(value = "/createAdmin")
-    @Secured("admin")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> addAdmin(@Valid @RequestBody SignupRequest signUpRequest) {
         if (userService.getUserByUserName(signUpRequest.getUsername()) != null) {
             return ResponseEntity
@@ -64,13 +64,13 @@ public class AdminController {
     }*/
 
     @GetMapping(value = "/adminList")
-    @Secured("admin")
+    @PreAuthorize("hasRole('ADMIN')")
     public List<Admin> getAdmins() {
         return adminService.findAll();
     }
 
     @GetMapping(value = "/getAllUsersList")
-    @Secured("admin")
+    @PreAuthorize("hasRole('ADMIN')")
     public List<User> getAllUsers() {
         return userService.findAll();
     }

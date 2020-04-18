@@ -48,20 +48,20 @@ public class UserDaoImpl implements UserDao, UserDaoCommon {
                 "INNER JOIN admin\n" +
                 "ON users.userName = admin.userName\n" +
                 "where admin.userName= '" + userName + "';", new AdminRowMapper()).isEmpty())
-            roles.add("admin");
+            roles.add("ROLE_ADMIN");
 
         else if (!template.query("SELECT *\n" +
                 "FROM users\n" +
                 "INNER JOIN buyer\n" +
                 "ON users.userName = buyer.userName\n" +
                 "where buyer.userName= '" + userName + "';", new AdminRowMapper()).isEmpty())
-            roles.add("buyer");
+            roles.add("ROLE_BUYER");
         else if (!template.query("SELECT *\n" +
                 "FROM users\n" +
                 "INNER JOIN store_owner\n" +
                 "ON users.userName = store_owner.userName\n" +
                 "where store_owner.userName= '" + userName + "';", new AdminRowMapper()).isEmpty())
-            roles.add("store_owner");
+            roles.add("ROLE_STORE_OWNER");
         return roles.get(0);
     }
 
