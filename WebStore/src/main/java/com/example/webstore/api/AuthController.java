@@ -8,6 +8,7 @@ import com.example.webstore.request.SignupRequest;
 import com.example.webstore.security.jwt.JwtResponse;
 import com.example.webstore.security.jwt.JwtUtils;
 import com.example.webstore.security.services.UserDetailsImpl;
+import com.example.webstore.service.AdminService;
 import com.example.webstore.service.BuyerService;
 import com.example.webstore.service.StoreOwnerService;
 import com.example.webstore.service.UserService;
@@ -37,6 +38,8 @@ public class AuthController {
     @Autowired
     UserService userService;
     @Autowired
+    AdminService adminService;
+    @Autowired
     StoreOwnerService storeOwnerService;
     @Autowired
     BuyerService buyerService;
@@ -48,7 +51,7 @@ public class AuthController {
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-
+        insertAdminWhenTableIsEmpty();
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
@@ -60,6 +63,15 @@ public class AuthController {
         return ResponseEntity.ok(new JwtResponse("Bearer " + jwt,
                 userDetails.getUsername(),
                 userDetails.getEmail()));
+    }
+
+    private void insertAdminWhenTableIsEmpty() {
+        if (userService.getTableSize() == 0) {
+            User user = new User("admin",
+                    "admin@admin.com",
+                    encoder.encode("admin"));
+            adminService.insertUser(user);
+        }
     }
 
 
