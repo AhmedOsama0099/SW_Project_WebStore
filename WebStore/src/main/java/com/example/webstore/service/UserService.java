@@ -26,7 +26,7 @@ public class UserService implements CommonServiceInt {
     public User getUserByUserName(String userName) {
         return userDao.getUserByUserName(userName);
     }
-
+    public int getTableSize(){return userDao.getTableSize();}
   /*  public void updateUser(User user) {
         userDao.updateUser(user);
     }

@@ -97,4 +97,8 @@ public class UserDaoImpl implements UserDao, UserDaoCommon {
         if (users.isEmpty()) return null;
         else return users.get(0);
     }
+
+    public int getTableSize() {
+        return template.query("select * from users", new UserRowMapper()).size();
+    }
 }
