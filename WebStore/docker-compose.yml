@@ -1,7 +1,7 @@
 version: "3"
 services:
   postgres:
-    image: 11993377/mypostgres:latest
+    image: postgres:alpine
     network_mode: bridge
     container_name: postgres1
     volumes:
@@ -11,13 +11,13 @@ services:
     ports:
       - 5432:5432
     environment:
-      - POSTGRES_PASSWORD=11993377
+      - POSTGRES_PASSWORD=1234
       - POSTGRES_USER=postgres
       - POSTGRES_DB=postgres
     # restart: unless-stopped
   # APP*****************************************
   webstore:
-    image: 11993377/myimage:latest
+    image: webstore
     #build: .
     network_mode: bridge
     container_name: web
